@@ -163,6 +163,21 @@ def validate_template(ctx, environment, stack):
         write(response, ctx.obj["output_format"])
 
 
+@cli.command(name="generate-config")
+@stack_options
+@click.pass_context
+@catch_exceptions
+def generate_config(ctx, environment, stack):
+    """
+    Displays the configuration used.
+
+    Prints ENVIRONMENT/STACK's configuration.
+    """
+    env = get_env(ctx.obj["sceptre_dir"], environment, ctx.obj["options"])
+    template_output = env.stacks[stack].parameters
+    write(yaml.dump(template_output, default_flow_style=False))
+
+
 @cli.command(name="generate-template")
 @stack_options
 @click.pass_context

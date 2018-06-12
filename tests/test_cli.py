@@ -87,6 +87,15 @@ class TestCli(object):
 
     @patch("sceptre.cli.os.getcwd")
     @patch("sceptre.cli.get_env")
+    def test_generate_config(self, mock_get_env, mock_getcwd):
+        mock_getcwd.return_value = sentinel.cwd
+        result = self.runner.invoke(cli, ["generate-config", "dev", "vpc"])
+        mock_get_env.assert_called_with(sentinel.cwd, "dev", {})
+
+        assert result.output == "param1: val1"
+
+    @patch("sceptre.cli.os.getcwd")
+    @patch("sceptre.cli.get_env")
     def test_lock_stack(self, mock_get_env, mock_getcwd):
         mock_getcwd.return_value = sentinel.cwd
         self.runner.invoke(cli, ["lock-stack", "dev", "vpc"])
