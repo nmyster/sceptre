@@ -229,6 +229,31 @@ class Stack(object):
     def __hash__(self):
         return hash(str(self))
 
+    def return_dict(self):
+
+        return {
+            "name": self.name,
+            "project_code": self.project_code,
+            "template_path": self.template_path,
+            "region": self.region,
+            "template_bucket_name": self.template_bucket_name,
+            "template_key_prefix": self.template_key_prefix,
+            "required_version": self.required_version,
+            "profile": self.profile,
+            "parameters": self.parameters,
+            "hooks": self.hooks,
+            "s3_details": self.s3_details,
+            "dependencies": self.dependencies,
+            "role_arn": self.role_arn,
+            "protected": self.protected,
+            "tags": self.tags,
+            "external_name": self.external_name,
+            "notifications": self.notifications,
+            "on_failure": self.on_failure,
+            "stack_timeout": self.stack_timeout,
+            "stack_group_config": self.stack_group_config
+        }
+
     @property
     def template(self):
         """
@@ -244,6 +269,7 @@ class Stack(object):
             self._template = Template(
                 path=self.template_path,
                 sceptre_user_data=self.sceptre_user_data,
+                stack_configuration=self.return_dict(),
                 s3_details=self.s3_details,
                 connection_manager=self.connection_manager
             )

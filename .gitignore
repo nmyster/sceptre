@@ -99,6 +99,10 @@ Temporary Items
 # User-specific stuff:
 .idea/
 .vscode/
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/provide-stack-configuration-to-sceptre-handler
 ## File-based project format:
 *.iws
 
